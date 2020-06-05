@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bigcity Help Desk!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+<h1>Welcome to Bigcity Help Desk!</h1>
+<h3>Hi {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Guest{% endif %}!</h3>
+
+{% if current_user.is_authenticated == false %}
+<ul>
+    <li><a href="/signup">Signup</a></li>
+    <li><a href="/login">Login</a></li>
+</ul>
+{% endif %}
+
+{% if current_user.is_authenticated %}
+
+    <h3>Available Chat Rooms</h3>
+    <ul>
+        {% for room in rooms %}
+
+            <li><a href="/rooms/{{ room._id}}">{{ room.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+</body>
+</html>
